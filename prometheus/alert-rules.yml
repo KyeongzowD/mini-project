@@ -4,9 +4,9 @@ groups:
       - alert: HighErrorRate
         expr: |
           (
-            sum(rate(http_server_requests_seconds_count{job="api", status=~"5.."}[1m]))
+            (sum(rate(http_server_requests_seconds_count{job="api", outcome="SERVER_ERROR"}[5m])) or vector(0))
             /
-            sum(rate(http_server_requests_seconds_count{job="api"}[1m]))
+            clamp_min(sum(rate(http_server_requests_seconds_count{job="api"}[5m])), 1)
           ) > 0.01
         for: 30s
         labels:
@@ -14,13 +14,13 @@ groups:
           service: api
         annotations:
           summary: "API error rate is high"
-          description: "최근 1분 기준 API의 에러 비율이 1%를 초과한 상태가 30초 이상 지속되었습니다."
+          description: "최근 5분 기준 API의 에러 비율이 1%를 초과한 상태가 30초 이상 지속되었습니다."
 
       - alert: HighLatencyP95
         expr: |
           histogram_quantile(
             0.95,
-            sum(rate(http_server_requests_seconds_bucket{job="api"}[1m])) by (le)
+            sum(rate(http_server_requests_seconds_bucket{job="api"}[5m])) by (le)
           ) > 0.3
         for: 30s
         labels:
@@ -28,14 +28,17 @@ groups:
           service: api
         annotations:
           summary: "API p95 latency is high"
-          description: "최근 1분 기준 API의 p95 latency가 300ms를 초과한 상태가 30초 이상 지속되었습니다."
+          description: "최근 5분 기준 API의 p95 latency가 300ms를 초과한 상태가 30초 이상 지속되었습니다."
 
       - alert: LowAvailability
         expr: |
           (
-            sum(rate(http_server_requests_seconds_count{job="api", status!~"5.."}[1m]))
-            /
-            sum(rate(http_server_requests_seconds_count{job="api"}[1m]))
+            1 -
+            (
+              (sum(rate(http_server_requests_seconds_count{job="api", outcome="SERVER_ERROR"}[5m])) or vector(0))
+              /
+              clamp_min(sum(rate(http_server_requests_seconds_count{job="api"}[5m])), 1)
+            )
           ) < 0.99
         for: 30s
         labels:
@@ -43,4 +46,4 @@ groups:
           service: api
         annotations:
           summary: "API availability is low"
-          description: "최근 1분 기준 API availability가 99% 미만인 상태가 30초 이상 지속되었습니다."
+          description: "최근 5분 기준 API availability가 99% 미만인 상태가 30초 이상 지속되었습니다."
