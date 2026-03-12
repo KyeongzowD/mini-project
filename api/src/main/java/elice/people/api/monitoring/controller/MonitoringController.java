@@ -20,7 +20,7 @@ public class MonitoringController {
 
     @GetMapping("/delay")
     public ResponseEntity<ApiResDto> delay(
-            @RequestParam(defaultValue = "10") long ms
+            @RequestParam(defaultValue = "5000") long ms
     ) {
         try {
             Thread.sleep(ms);
