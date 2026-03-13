@@ -52,14 +52,9 @@ sum(increase(http_server_requests_seconds_count{job=“api”}[5m]))
 
 ## 대시보드 & Prometheus Alert
 ### Grafana
-![img.png](img.png)
+![grafana.png](./image/grafana.png)
 
 ### Prometheus
-
-![스크린샷 2026-03-13 오전 5.08.51.png](..%2F..%2F..%2F..%2FDesktop%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-03-13%20%EC%98%A4%EC%A0%84%205.08.51.png)
-
-![스크린샷 2026-03-13 오후 9.24.49.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2F5v%2Fmh8l76rn2qvbx47jk822w1bw0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_kGlFQN%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-03-13%20%EC%98%A4%ED%9B%84%209.24.49.png)
-
-![스크린샷 2026-03-13 오후 9.25.56.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2F5v%2Fmh8l76rn2qvbx47jk822w1bw0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_a1Jhh3%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-03-13%20%EC%98%A4%ED%9B%84%209.25.56.png)
-
-![스크린샷 2026-03-13 오후 9.26.09.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2F5v%2Fmh8l76rn2qvbx47jk822w1bw0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_klJtHh%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-03-13%20%EC%98%A4%ED%9B%84%209.26.09.png)
+![prometheus_success.png](./image/prometheus_success.png)
+![prometheus_pending.png](./image/prometheus_pending.png)
+![prometheus_firing.png](./image/prometheus_firing.png)
